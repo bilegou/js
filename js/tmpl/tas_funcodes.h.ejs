@@ -1,0 +1,8 @@
+#ifndef _TASFUNCODES_H_
+#define _TASFUNCODES_H_
+
+<% for (var i = 0; i < ALL.length; ++i) { var Item = ALL[i]; %>
+#define FID_<%= Item.Identify %> <%= (Item.CH << 24) | (Item.CL << 16) | Item.C2 %>
+<% } %>
+
+#endif
