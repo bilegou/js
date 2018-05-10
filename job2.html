@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="js/jquery-1.6.4.min.js" type="text/javascript"></script>
+    <meta charset="UTF-8">
+    <title>job</title>
+</head>
+<body>
+<div>这是ajax：</div>
+<div id="ajax"></div>
+</body>
+
+</html>
+
+<script>
+
+    function ajax() {
+
+        $.ajax({
+
+            url: 'http://test.piggybb.com/api/goorder/testPost',
+            dataType:'json',
+            type:'post',
+            async: true,//异步
+
+            success:function (json) {
+
+                str1 =  JSON.stringify(json,null,4);
+
+            },
+
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        })
+    }
+
+
+</script>
