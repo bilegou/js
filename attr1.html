@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="js/jquery-1.6.4.min.js" type="text/javascript"></script>
+    <meta charset="UTF-8">
+    <title>简单的js获取</title>
+</head>
+<body>
+
+<div id="val" class="val" style="color: #000; border: 1px solid #000000; " >黑色的</div>
+<div id="toggle"><img src="img/bar1.jpg" id="img"></div>
+<input id="img2" type="button" onclick="img_change()" value="改变图片样式">
+<input id="tog" type="button" onclick="tog()" value="隐藏显示图片">
+</body>
+
+</html>
+
+<script>
+
+   html = $('#val').html();
+
+    alert(html);
+
+   attr = $('#val').attr('style');
+
+   alert(attr);
+
+   
+   
+   function img_change() {
+       $('#img').attr('src','img/img2.jpg');
+
+   }
+
+   function tog(){
+       $('#toggle').toggle();
+   }
+
+</script>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>localStorage</title>
+    <script src="js/jquery-1.6.4.min.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div id="json_string"></div>
+
+<input id="storage" type="button" onclick="storage()" value="存储">
+<input id="json_str" type="button" onclick="json_str()" value="存储json_str">
+<input id="json_display" type="button" onclick="json_display()" value="展现json_str">
+<input id="clear" type="button" onclick="clear_storage()" value="清空">
+
+</body>
+</html>
+
+<script>
+
+function storage() {
+
+    if(!localStorage.cot){
+
+
+        localStorage.cot = 1
+
+
+    }else{
+
+    localStorage.cot = localStorage.cot + 1;
+
+}
+alert(localStorage.cot);
+}
+
+function clear_storage() {
+
+    localStorage.clear();
+    alert('清空内存完毕');
+
+}
+
+function json_str() {
+
+    var students = {
+        xiaomin: {
+            name: "xiaoming",
+            grade: 1
+        },
+        teemo: {
+            name: "teemo",
+            grade: 3
+        }
+    }
+
+    students = JSON.stringify(students);
+
+    localStorage.setItem('stu',students);
+
+    alert('存储json字符串成功');
+
+}
+
+function json_display() {
+
+    str1 =  localStorage.getItem('stu');
+
+    $('#json_string').html(str1);
+
+}
+</script>
