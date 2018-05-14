@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>三级联动</title>
@@ -8,12 +8,12 @@
 </head>
 <body>
 <p>省份</p>
-<select id="province" onchange="javascript:getProvince()">
+<select id="province" onchange="javascript:getCity()">
     <option name="option1" value="">请选择</option>
 </select>
 
 <p>城市</p>
-<select id="city" onchange="getCity()">
+<select id="city" onchange="javascript:getCounty()">
     <option name="option2" >请选择</option>
 </select>
 
@@ -27,11 +27,6 @@
 
 <script>
 
-    function fun2() {
-
-
-    }
-
     function getProvince() {
 
         $.ajax({
@@ -40,9 +35,7 @@
             type:'post',
             data:{},
             async:true,
-
             success:function (json) {
-
                 list_html = '';
                 list_html += '<option name="option1" value="">请选择省</option>';
                 for(key in json){
@@ -61,45 +54,71 @@
 
     }
 
-    function getCity() {
+        function getCity() {
 
-        province_id = $('#option1');
-        opt = province_id[0];
-        id = opt[opt.selectedIndex].value;
+            province_id = $('#province');
+            opt = province_id[0];
+            id = opt[opt.selectedIndex].value;
 
-        $.ajax({
-            url: 'http://120.77.174.30/api/City/getCity',
-            dataType:'json',
-            type:'post',
-            data:{'province_id':id},
-            async:true,
+            $.ajax({
+                url: 'http://120.77.174.30/api/City/getCity',
+                dataType:'json',
+                data:{'province':id},
+                type:'post',
+                async:true,
 
-            success:function (json) {
+                success:function (json) {
 
-                list_html = '';
-                list_html += '<option name="option2" value="">请选择省</option>';
-                for(key in json){
-                    node = json[key];
-                    list_html += '<option name="option2" value= "'+ node.city_id +'" >' + node.name +'</option>';
-                }
-                $('#city').html(list_html);
+                    city_list = '';
+                    city_list += '<option name="option2" value="">请选择市</option>';
+                    for(key in json){
+                        node = json[key];
+                        city_list += '<option name="option2" value= "'+ node.city_id +'" >' + node.name +'</option>';
+                    }
+                    $('#city').html(city_list);
+                    $('#county').html('<option name="option3" value="">请选择地区</option>');
 
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-            },
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                },
 
-        });
-
-
-    }
-
-    function getCounty() {
+            });
 
 
+        }
 
-    }
+        function getCounty() {
 
+            city_id = $('#city');
+            opt = city_id[0];
+            id = opt[opt.selectedIndex].value;
+
+            $.ajax({
+                url: 'http://120.77.174.30/api/City/getCounty',
+                dataType:'json',
+                data:{'city':id},
+                type:'post',
+                async:true,
+
+                success:function (json) {
+
+                    county_list = '';
+                    county_list += '<option name="option3" value="">请选择区</option>';
+                    for(key in json){
+                        node = json[key];
+                        county_list += '<option name="option3" value= "'+ node.county_id +'" >' + node.name +'</option>';
+                    }
+                    $('#county').html(county_list);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                },
+
+            });
+
+
+        }
 
     $(document).ready(function () {
         getProvince();
