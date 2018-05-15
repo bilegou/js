@@ -36,7 +36,7 @@
             data:{},
             async:true,
             success:function (json) {
-                list_html = '';
+               var list_html = '';
                 list_html += '<option name="option1" value="">请选择省</option>';
                 for(key in json){
                     node = json[key];
@@ -69,13 +69,13 @@
 
                 success:function (json) {
 
-                    city_list = '';
-                    city_list += '<option name="option2" value="">请选择市</option>';
+                    var list_html = '';
+                    list_html += '<option name="option2" value="">请选择市</option>';
                     for(key in json){
                         node = json[key];
-                        city_list += '<option name="option2" value= "'+ node.city_id +'" >' + node.name +'</option>';
+                        list_html += '<option name="option2" value= "'+ node.city_id +'" >' + node.name +'</option>';
                     }
-                    $('#city').html(city_list);
+                    $('#city').html(list_html);
                     $('#county').html('<option name="option3" value="">请选择地区</option>');
 
                 },
@@ -103,13 +103,13 @@
 
                 success:function (json) {
 
-                    county_list = '';
-                    county_list += '<option name="option3" value="">请选择区</option>';
+                    var list_html = '';
+                    list_html += '<option name="option3" value="">请选择区</option>';
                     for(key in json){
                         node = json[key];
-                        county_list += '<option name="option3" value= "'+ node.county_id +'" >' + node.name +'</option>';
+                        list_html += '<option name="option3" value= "'+ node.county_id +'" >' + node.name +'</option>';
                     }
-                    $('#county').html(county_list);
+                    $('#county').html(list_html);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);

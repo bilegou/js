@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单获取测试</title>
+    <script src="js/jquery-1.6.4.min.js" type="text/javascript"></script>
+</head>
+<body>
+
+<p>注册信息</p>
+<form name="data" >
+<div>账号：<input id="username1" name="username"></div>
+<div>密码：<input id="password1" name="password"></div>
+<div>手机号：<input id="phone1" name="phone"></div>
+<div><input id="getdata" value="获取" type="button" onclick="getcount()"></div>
+
+<div id="text"></div>
+</form>
+<input type="button" onclick="add()" value="新增一个注册信息">
+<div id="add"></div>
+</body>
+</html>
+
+<script>
+
+    i = {};
+
+    function getcount (tx) {
+
+        var username = $('#username'+tx+'').val()
+        var password = $('#password'+tx+'').val()
+        var phone = $('#phone'+tx+'').val()
+
+//        data = document['data'];
+//        username = data.username.value;
+//        password = data.password.value;
+//        phone = data.phone.value;
+
+
+        var list_html = '';
+        list_html  += '<div id="text">账号为：' + username + '</div>'
+        list_html  += '<div id="text">密码为：' + password + '</div>'
+        list_html  += '<div id="text">电话为：' + phone + '</div>'
+
+        $('#text').append(list_html);
+    }
+
+    function add(tx) {
+
+        if(i.id){
+            i.id  += 1;
+        }else {
+            i.id = 2;
+        }
+        var list_html ='';
+
+        list_html += '<div>账号：<input id="username'+i.id+'"></div>';
+        list_html += '<div>密码：<input id="password'+i.id+'"></div>';
+        list_html += '<div>手机号：<input id="phone'+i.id+'"></div>';
+        list_html +='<input id="getdata" type="button" onclick="getcount('+i.id+')" value="获取">';
+
+        $("#add").append(list_html);
+
+    }
+
+</script>
